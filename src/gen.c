@@ -1,9 +1,16 @@
 #include <chaos/gen.h>
 
-void gen_init(struct gen *g)
+void gen_init(struct gen *g, uint64_t k[6])
 {
-        ainit(&g->as[0], gen_seed);
-        ainit(&g->as[1], gen_seed);
+        ainit(&g->as[0], 
+                (double)k[0] / UINT64_MAX, 
+                (double)k[1] / UINT64_MAX, 
+                (double)k[2] / UINT64_MAX);
+        ainit(&g->as[1], 
+                (double)k[3] / UINT64_MAX, 
+                (double)k[4] / UINT64_MAX, 
+                (double)k[5] / UINT64_MAX);
+
         for(uint8_t i = 0; i < DISCARD - 1; ++i) {
                 anext(&g->as[0]);
                 anext(&g->as[1]);

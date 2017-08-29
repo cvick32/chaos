@@ -1,6 +1,6 @@
 #include "seed.h"
 
-double gen_seed() {
+uint64_t sbytes() {
         int fd = 0; 
         ssize_t res = 0;
         uint64_t buf = 0;
@@ -9,5 +9,5 @@ double gen_seed() {
         if((res = read(fd, &buf, sizeof(buf))) < 0)
                 exit(-1);
         close (fd);
-        return (double)buf / UINT64_MAX;
+        return buf;
 }

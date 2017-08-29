@@ -6,5 +6,5 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-double gen_seed();
+uint64_t sbytes();
 #endif

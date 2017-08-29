@@ -13,7 +13,7 @@ struct gen {
         struct attractor as[2];
 };
 
-void gen_init(struct gen *g);
+void gen_init(struct gen *g, uint64_t k[6]);
 uint32_t gen32(struct gen *g);
 
 #endif

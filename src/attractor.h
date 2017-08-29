@@ -25,7 +25,7 @@ struct attractor {
         union dbits x, y, z;
 };
 
-void ainit(struct attractor *a, double (*uniform)());
+void ainit(struct attractor *a, double ix, double iy, double iz);
 void anext(struct attractor *a);
 
 #endif
