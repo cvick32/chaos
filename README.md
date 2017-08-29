@@ -1,13 +1,8 @@
 ## BUILD
 
-*requires testu01*
-
 mkdir build &&
- 
-cd build/ && 
-
+cd build && 
 cmake .. &&
-
 make
 
-./rng_demo to run hamming distance test on successive pairs of an encrypted counter, and the testu01 crush battery.
+./stream_test - averages hamming distance over 500,000 consecutive pairs of an encrypted counter.

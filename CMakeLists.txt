@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(chaos)
+enable_testing()
 
 add_library(chaos
 	include/chaos/gen.h
@@ -11,11 +12,7 @@ add_library(chaos
 )
 target_include_directories(chaos PUBLIC include)
 target_include_directories(chaos PRIVATE src)
-add_executable(rng_demo
+add_executable(stream_test
 	test/main.c
 )
-target_link_libraries(rng_demo chaos)
-target_link_libraries(rng_demo m)
-target_link_libraries(rng_demo probdist)
-target_link_libraries(rng_demo mylib)
-target_link_libraries(rng_demo testu01)
+target_link_libraries(stream_test chaos)
