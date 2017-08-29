@@ -2,12 +2,9 @@
 
 *requires testu01*
 
-mkdir build &&
- 
+mkdir build && 
 cd build/ && 
-
-cmake ..
-
+cmake .. &&
 make
 
 ./rng_demo to run hamming distance test on successive pairs of an encrypted counter, and the testu01 crush battery.
