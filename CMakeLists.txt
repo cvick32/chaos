@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 project(chaos)
-enable_testing()
+set(MY_RELEASE_OPTIONS "-march=native")
+set(MY_DEBUG_OPTIONS "-Wall" "-Werror")
 
 add_library(chaos
 	include/chaos/gen.h
@@ -15,4 +16,6 @@ target_include_directories(chaos PRIVATE src)
 add_executable(stream_test
 	test/main.c
 )
+target_compile_options(stream_test PUBLIC "$<$<CONFIG:DEBUG>:${MY_DEBUG_OPTIONS}>")
+target_compile_options(stream_test PUBLIC "$<$<CONFIG:RELEASE>:${MY_RELEASE_OPTIONS}>")
 target_link_libraries(stream_test chaos)
