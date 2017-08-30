@@ -7,4 +7,5 @@
 #include <inttypes.h>
 
 uint64_t sbytes();
+
 #endif

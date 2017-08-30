@@ -26,6 +26,11 @@ struct attractor {
 };
 
 void ainit(struct attractor *a, double ix, double iy, double iz);
-void anext(struct attractor *a);
+static inline void anext(struct attractor *a)
+{
+        a->x.d = a->x.d + H * (-a->y.d - a->z.d);
+        a->y.d = a->y.d + H * (a->x.d + A * a->y.d); 
+        a->z.d = a->z.d + H * (B + a->z.d * (a->x.d - C));
+}
 
 #endif

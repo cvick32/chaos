@@ -3,6 +3,6 @@
 
 #include <chaos/gen.h>
 
-void cipher(struct gen *g, uint8_t *buf, uint32_t len);
+void cipher(struct gen *g, uint8_t *buf, uint64_t len);
 
 #endif

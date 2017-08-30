@@ -10,10 +10,10 @@
 #define ROL(x,n) ((x = ((x << n) | (x >> (32 - n)))))
 
 struct gen {
-        struct attractor as[2];
+        struct attractor a;
 };
 
-void gen_init(struct gen *g, uint64_t k[6]);
+void gen_init(struct gen *g, uint64_t k[3]);
 uint32_t gen32(struct gen *g);
 uint64_t gen64(struct gen *g);
 void gen96(struct gen *g, uint32_t out[3]);

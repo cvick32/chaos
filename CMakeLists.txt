@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 project(chaos)
 set(MY_DEBUG_OPTIONS "-Wall" "-Werror")
-set(MY_RELEASE_OPTIONS "-march=native")
+set(MY_RELEASE_OPTIONS "-g" "-march=native")
 
 add_library(chaos
 	include/chaos/gen.h
