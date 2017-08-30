@@ -7,8 +7,8 @@ add_library(chaos
 	include/chaos/gen.h
 	include/chaos/enc.h
 	src/attractor.h
+	src/attractor.c
 	src/seed.h
-        src/attractor.c
         src/seed.c
 	src/gen.c
 	src/enc.c
