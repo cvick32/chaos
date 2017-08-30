@@ -1,13 +1,13 @@
 #include <chaos/enc.h>
 
-void cipher(struct gen *g, uint8_t *buf, uint64_t len)
+void cipher(struct gen *g, uint8_t *buf, size_t len)
 {
         uint32_t stream_pos;
-        uint64_t ncalls = len >> 2;
+        size_t ncalls = len >> 2;
         uint8_t left = len & 3;
         uint8_t *tmp = (uint8_t *)&stream_pos;
 
-        for(uint64_t i = 0; i < ncalls; ++i) {
+        for(size_t i = 0; i < ncalls; ++i) {
                 stream_pos = gen32(g);
 
                 buf[(i<<2)] ^= tmp[0];

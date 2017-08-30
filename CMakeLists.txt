@@ -1,20 +1,15 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 project(chaos)
 set(MY_DEBUG_OPTIONS "-Wall" "-Werror")
-set(MY_RELEASE_OPTIONS "-g" "-march=native")
+set(MY_RELEASE_OPTIONS "-march=native")
 
 add_library(chaos
 	include/chaos/gen.h
 	include/chaos/enc.h
-	src/attractor.h
-	src/attractor.c
-	src/seed.h
-        src/seed.c
 	src/gen.c
 	src/enc.c
 )
 target_include_directories(chaos PUBLIC include)
-target_include_directories(chaos PRIVATE src)
 add_executable(stream_test
 	test/main.c
 )

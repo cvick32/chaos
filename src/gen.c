@@ -1,25 +1,39 @@
 #include <chaos/gen.h>
 
+static void init(struct gen *g, double ix, double iy, double iz)
+{
+        g->x.d = ix;
+        g->y.d = iy;
+        g->z.d = iz;
+}
+
+static void iterate(struct gen *g)
+{
+        g->x.d = g->x.d + H * (-g->y.d - g->z.d);
+        g->y.d = g->y.d + H * (g->x.d + A * g->y.d); 
+        g->z.d = g->z.d + H * (B + g->z.d * (g->x.d - C));
+}
+
 void gen_init(struct gen *g, uint64_t k[3])
 {
-        ainit(&g->a,
+        init(g,
                 (double)k[0] / UINT64_MAX, 
                 (double)k[1] / UINT64_MAX, 
                 (double)k[2] / UINT64_MAX);
         for(uint8_t i = 0; i < DISCARD - 1; ++i)
-                anext(&g->a);
+                iterate(g);
 }
 
 uint32_t gen32(struct gen *g)
 {
-        static uint32_t m[6];
-        m[0] = (uint32_t)(g->a.x.p.mant >> 32);
-        m[1] = (uint32_t)(g->a.x.p.mant);
-        m[2] = (uint32_t)(g->a.y.p.mant >> 32);
-        m[3] = (uint32_t)(g->a.y.p.mant);
-        m[4] = (uint32_t)(g->a.z.p.mant >> 32);
-        m[5] = (uint32_t)(g->a.z.p.mant);
-        anext(&g->a);
+        uint32_t m[6];
+        m[0] = (uint32_t)(g->x.p.mant >> 32);
+        m[1] = (uint32_t)(g->x.p.mant);
+        m[2] = (uint32_t)(g->y.p.mant >> 32);
+        m[3] = (uint32_t)(g->y.p.mant);
+        m[4] = (uint32_t)(g->z.p.mant >> 32);
+        m[5] = (uint32_t)(g->z.p.mant);
+        iterate(g);
 
         m[0] += m[1];
         m[2] += m[3];
@@ -33,27 +47,4 @@ uint32_t gen32(struct gen *g)
         }
         m[2] += m[4];
         return m[2];
-}
-
-uint64_t gen64(struct gen *g)
-{
-        uint32_t a = gen32(g);
-        uint32_t b = gen32(g);
-        uint64_t ret = (uint64_t)a << 32 | b;
-        return ret;
-}
-
-void gen96(struct gen *g, uint32_t out[3])
-{
-        out[0] = gen32(g); 
-        out[1] = gen32(g); 
-        out[2] = gen32(g);
-}
-
-void gen128(struct gen *g, uint32_t out[4])
-{
-        out[0] = gen32(g); 
-        out[1] = gen32(g); 
-        out[2] = gen32(g);
-        out[3] = gen32(g); 
 }
