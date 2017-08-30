@@ -1,36 +1,46 @@
-#include <chaos/gen.h>
+#include <chaos/enc.h>
 #include <stdio.h>
 
-uint32_t hamming_test(uint32_t a, uint32_t b)
-{
-        uint32_t dist = 0;
-        uint32_t val = a ^ b;
-        while (val != 0) {
-                dist++;
-                val &= val - 1;
-        }
-        return dist;
-}
+#define MSG_LEN 22
 
 int main(void)
 {
-
-        struct gen g;
-        uint64_t k[6] = {
+        uint32_t i;
+        uint64_t msg[MSG_LEN] = {
+                180,  27, 146, 108, 
+                221,  49, 231, 201,
+                 73, 235, 214,  98, 
+                154,  50,  78,  13, 
+                 24, 127,  98,  42, 
+                107, 234
+        };
+        uint64_t key[6] = {
                 sbytes(), sbytes(), sbytes(), 
                 sbytes(), sbytes(), sbytes()
         };
+        struct gen g;
+
+        /* original */
+        printf("msg:     ");
+        for(i = 0; i < sizeof msg; ++i)
+                printf("%" PRIu8 "", msg[i]);
+        putchar('\n');
+
+        /* enc */
         gen_init(&g, k);
+        cipher(&g, msg, sizeof msg);
 
-        uint32_t i;
-        uint32_t avg = 0;
-        for(i = 1; i <= 1000000; i+=2)
-                avg += hamming_test((i ^ gen32(&g)), ((i + 1) ^ gen32(&g)));
-        printf("avg hamming distance over consecutive pairs: %f\n", 
-                        (float)avg / 500000);
+        printf("msg enc: ");
+        for(i = 0; i < sizeof msg; ++i)
+                printf("%" PRIu8 "", msg[i]);
+        putchar('\n');
 
-        for(i = 1; i <= 10; ++i)
-                printf("%d enc: %" PRIu32 "\n", i, i ^ gen32(&g));
-        for(i = 1; i <= 10; ++i)
-                printf("%d enc: %" PRIu32 "\n", i, i ^ gen32(&g));
+        /* dec */
+        gen_init(&g, k);
+        cipher(&g, msg, sizeof msg);
+
+        printf("msg dec: ");
+        for(i = 0; i < sizeof msg; ++i)
+                printf("%" PRIu8 "", msg[i]);
+        putchar('\n');
 }
