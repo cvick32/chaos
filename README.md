@@ -14,7 +14,7 @@ make
 
 ## MISC
 
-generator state is the current point of the rossler attractor with A=0.4264,
+generator state is the current point of the rossler attractor with A=0.4263,
 B=2, C=4 
 
 gen32 returns a mix of each point's mantissa 
