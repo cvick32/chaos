@@ -55,3 +55,26 @@ uint32_t gen32(struct gen *g)
         m[1] = m[1] ^ m[5] ^ m[9];
         return m[1];
 }
+
+uint64_t gen64(struct gen *g)
+{
+        uint32_t a = gen32(g);
+        uint32_t b = gen32(g);
+        uint64_t ret = (uint64_t)a << 32 | b;
+        return ret;
+}
+
+void gen96(struct gen *g, uint32_t out[3])
+{
+        out[0] = gen32(g); 
+        out[1] = gen32(g); 
+        out[2] = gen32(g);
+}
+
+void gen128(struct gen *g, uint32_t out[4])
+{
+        out[0] = gen32(g); 
+        out[1] = gen32(g); 
+        out[2] = gen32(g);
+        out[3] = gen32(g); 
+}

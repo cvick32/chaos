@@ -1,19 +1,19 @@
 #include <chaos/enc.h>
 #include <stdio.h>
+#include <time.h>
 
-#define MSG_LEN 22
+#define MSG_LEN 64 
 
 int main(void)
 {
+        srand(time(NULL));
         uint32_t i;
-        uint8_t msg[MSG_LEN] = {
-                180,  27, 146, 108, 
-                221,  49, 231, 201,
-                 73, 235, 214,  98, 
-                154,  50,  78,  13, 
-                 24, 127,  98,  42, 
-                107, 234
-        };
+
+        /* fill msg with rand bytes */
+        uint8_t msg[MSG_LEN];
+        for(i = 0; i < MSG_LEN; ++i)
+                msg[i] = rand();
+
         uint64_t key[6] = {
                 sbytes(), sbytes(), sbytes(), 
                 sbytes(), sbytes(), sbytes()

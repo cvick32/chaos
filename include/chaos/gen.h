@@ -15,5 +15,8 @@ struct gen {
 
 void gen_init(struct gen *g, uint64_t k[6]);
 uint32_t gen32(struct gen *g);
+uint64_t gen64(struct gen *g);
+void gen96(struct gen *g, uint32_t out[3]);
+void gen128(struct gen *g, uint32_t out[4]);
 
 #endif
