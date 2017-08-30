@@ -1,8 +1,9 @@
 ## BUILD
 
+cd chaos
 mkdir build &&
 cd build && 
-cmake .. &&
+cmake -DCMAKE_BUILD_TYPE=Debug .. &&
 make
 
-./stream_test - averages hamming distance over 500,000 consecutive pairs of an encrypted counter.
+./stream_test - encrypts a 22 byte msg
