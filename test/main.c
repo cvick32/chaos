@@ -6,7 +6,7 @@
 int main(void)
 {
         uint32_t i;
-        uint64_t msg[MSG_LEN] = {
+        uint8_t msg[MSG_LEN] = {
                 180,  27, 146, 108, 
                 221,  49, 231, 201,
                  73, 235, 214,  98, 
@@ -27,7 +27,7 @@ int main(void)
         putchar('\n');
 
         /* enc */
-        gen_init(&g, k);
+        gen_init(&g, key);
         cipher(&g, msg, sizeof msg);
 
         printf("msg enc: ");
@@ -36,7 +36,7 @@ int main(void)
         putchar('\n');
 
         /* dec */
-        gen_init(&g, k);
+        gen_init(&g, key);
         cipher(&g, msg, sizeof msg);
 
         printf("msg dec: ");

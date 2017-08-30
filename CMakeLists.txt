@@ -5,11 +5,13 @@ set(MY_DEBUG_OPTIONS "-Wall" "-Werror")
 
 add_library(chaos
 	include/chaos/gen.h
+	include/chaos/enc.h
 	src/attractor.h
 	src/seed.h
         src/attractor.c
         src/seed.c
 	src/gen.c
+	src/enc.c
 )
 target_include_directories(chaos PUBLIC include)
 target_include_directories(chaos PRIVATE src)
