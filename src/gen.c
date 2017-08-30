@@ -41,7 +41,7 @@ uint32_t gen32(struct gen *g)
         m[6] += m[7];
         m[8] += m[9];
         m[10] += m[11];
-        for(uint8_t i = 0; i < 18; ++i) {
+        for(uint8_t i = 0; i < 14; ++i) {
                 m[11] += m[5];
                 m[3] += m[9];
                 m[7] += m[1];

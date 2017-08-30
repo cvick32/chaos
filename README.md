@@ -10,4 +10,4 @@ cmake -DCMAKE_BUILD_TYPE=Debug .. &&
 
 make
 
-./stream_test - encrypts a 22 byte msg
+./stream_test - encrypts a 100 byte msg

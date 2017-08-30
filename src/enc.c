@@ -30,10 +30,7 @@ void cipher(struct gen *g, uint8_t *buf, uint32_t len)
                 buf[(i<<4)+14] ^= tmp[14];
                 buf[(i<<4)+15] ^= tmp[15];
         }
-
-        if(left == 0) {
-                return;
-        } else {
+        if(left != 0) {
                 gen128(g, stream_pos);
                 for(uint8_t i = 0; i < left; ++i)
                         buf[(ncalls<<4)+i] ^= tmp[i];
