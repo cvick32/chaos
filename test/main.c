@@ -18,7 +18,8 @@ uint64_t sbytes()
                 exit(-1);
         if((res = read(fd, &buf, sizeof buf)) < 0)
                 exit(-1);
-        close (fd);
+        buf &= ((1ULL << 53) - 1);
+        close(fd);
         return buf;
 }
 

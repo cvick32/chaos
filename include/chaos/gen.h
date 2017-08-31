@@ -2,9 +2,10 @@
 #define GEN_H
 
 #include <inttypes.h>
+#include <math.h>
 
 /* removes initial noise */
-#define DISCARD 32 
+#define DISCARD 64 
 
 /* attractor constants */
 #define A 0.4263
