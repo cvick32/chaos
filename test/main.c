@@ -4,12 +4,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <unistd.h>
+#include <time.h>
 
 const size_t MSG_LEN = 1000000000;
 
-uint64_t sbytes() {
+uint64_t sbytes() 
+{
         int fd = 0; 
         ssize_t res = 0;
         uint64_t buf = 0;
@@ -25,19 +26,18 @@ int main(void)
 {
         struct gen g;
         uint64_t key[3] = {sbytes(), sbytes(), sbytes()};
-        uint8_t *msg = malloc(MSG_LEN);
 
-        /* fill msg with 1s */
+        /* generate 1GiB of 1s */
+        uint8_t *msg = malloc(MSG_LEN);
         memset(msg, 1, MSG_LEN);
 
         /* enc */
         gen_init(&g, key);
-        gen32(&g);
         clock_t s = clock();
         cipher(&g, msg, MSG_LEN);
         clock_t e = clock();
         double spent = (double)(e - s) / CLOCKS_PER_SEC;
-        printf("enc time 1GiB: %lf\n", spent); 
+        printf("1GiB in %lfs\n", spent);
 
         free(msg);
 }
