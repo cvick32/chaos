@@ -26,6 +26,8 @@ int main(void)
 {
         struct gen g;
         uint64_t key[3] = {sbytes(), sbytes(), sbytes()};
+        printf("key: %" PRIu64 " %" PRIu64 " %" PRIu64 "\n",
+                key[0], key[1], key[2]);
 
         /* generate 1GiB of 1s */
         uint8_t *msg = malloc(MSG_LEN);
